@@ -1,0 +1,3 @@
+[submodule "helpel-server"]
+  path = helpel-server
+  url = ssh://git@github-humorbaby/HumorBaby/gwkowk-server.git
