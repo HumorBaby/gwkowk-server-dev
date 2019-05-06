@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  app:
+    extends:
+      file: docker-compose.yml
+      service: app
+    ports:
+      - "127.0.0.1:13000:3000"
+      - "127.0.0.1:19229:9229"
+    command: "tail -f /dev/null"
+    
+  # Local database for testing/development; passwords okay to commit
+  db:
+    image: mongo:4-bionic
+    environment: 
+      - MONGO_INITDB_ROOT_USERNAME=helpel
+      - MONGO_INITDB_ROOT_PASSWORD=helpel_password#
+    volumes:
+      - "./dev-db-data:/data/db"
+  
+  mongo-express:
+    image: mongo-express
+    ports:
+      - "127.0.0.1:18081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=db
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=helpel
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=helpel_password#

@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  app:
+    image: node:10-alpine
+    working_dir: /app
+    user: node
+    volumes:
+      - "./helpel-server:/app"
+    command: "npm run dev"
